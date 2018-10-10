@@ -1,16 +1,14 @@
 import express from "express";
 import bodyParser from "body-parser";
 import { Routes } from "./routes/Routes";
-class App {
+export class App {
   public app: express.Application;
-  public routes: Routes = new Routes();
-
-  constructor() {
+    constructor(public readonly routes: Routes = new Routes()) {
     this.app = express();
-    this.setUp();
+    this.conf();
   }
 
-  private setUp(): void {
+  private conf(): void {
     this.app.use(bodyParser.json());
     this.app.set("port", process.env.PORT || 3000);
     this.app.use(bodyParser.urlencoded({ extended: true }));
