@@ -37,7 +37,14 @@ export class Routes {
         /* Charge or Credit a card */
             .put((req: Request, res: Response) => {
                 const operation = new Operation(req.body.type, req.body.amount, req.body.accountName);
-                res.status(200).send(services.accounts.process(operation));
+                const result = services.accounts.process(operation);
+                if (!result) {
+                    res.status(404).send({ message: "account was not found"});
+                } else {
+                    res.status(200).send(result);
+                }
+                console.log("**** ", result);
+
             });
     }
 }

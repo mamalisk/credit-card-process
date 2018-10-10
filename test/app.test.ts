@@ -116,7 +116,7 @@ describe("GET /random-url", () => {
 
   });
 
-  it("should fail to credit or charge an unknown account name", (done) => {
+  it("should fail to credit or charge for wrongly formated amount", (done) => {
     const create = {
       name: "Another",
       accountNumber: "4111111111111111",
@@ -171,11 +171,11 @@ describe("GET /random-url", () => {
 
   });
 
-  it("should fail to credit or charge for wrongly formated amount", (done) => {
+  it("should fail to credit or charge an unknown account name", (done) => {
     const charge = {
       "type": "CHARGE",
       "accountName": "Unknown",
-      "amount": "1000.00",
+      "amount": "£1,000.00",
     };
 
     const application = new App(new Routes());
@@ -183,7 +183,7 @@ describe("GET /random-url", () => {
     request(application.app)
     .put("/card")
     .send(charge)
-    .expect(500, done);
+    .expect(404, done);
   });
 
 

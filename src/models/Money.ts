@@ -1,6 +1,6 @@
 export default class Money {
     static format(amount: number): string {
-        return `£${Math.abs(amount).toFixed(2)}`;
+        return `£${amount.toFixed(2)}`;
     }
 
     static parse(s: string): number {
